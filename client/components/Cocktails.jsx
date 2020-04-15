@@ -27,12 +27,13 @@ class Cocktails extends React.Component {
     request.get(apiUrl)
       // .query({ s: cocktail })
       .then(res => {
-        const { strDrink, strInstructions, strDrinkThumb } = res.body.drinks[0]
+        // console.log(res.body)
+        const { name, image, instructions } = res.body
         // console.log(response.body.drinks[0])
         this.setState({
-          name: strDrink,
-          image: strDrinkThumb,
-          instructions: strInstructions
+          name,
+          image,
+          instructions
         })
       })
   }
