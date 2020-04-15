@@ -4,7 +4,9 @@ import request from 'superagent'
 const apiUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
 const cocktail = 'margarita'
 const imgStyle = {
-  width: '400px'
+  width: '400px',
+  marginTop: '20px',
+  marginBottom: '20px'
 }
 
 // strDrink, strIngredient1, strIngredient2, strIngredient3, strIngredient4,strInstructions, strDrinkThumb
