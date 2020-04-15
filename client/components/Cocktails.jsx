@@ -17,8 +17,8 @@ class Cocktails extends React.Component {
   render () {
     return (
       <>
-        <h2>Classic cocktails</h2>
-        <div>{this.state.name}</div>
+        <h1>Classic cocktails</h1>
+        <div><h2>{this.state.name}</h2></div>
         <img src={this.state.image} alt={`image of a ${this.state.name}`} />
         <div>Instructions: {this.state.instructions}</div>
       </>
