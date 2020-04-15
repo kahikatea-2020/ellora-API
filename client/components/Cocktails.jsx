@@ -1,5 +1,11 @@
 import React from 'react'
-// import request from 'superagent'
+import request from 'superagent'
+
+const apiUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
+const cocktail = 'margarita'
+const imgStyle = {
+  width: '400px'
+}
 
 // strDrink, strIngredient1, strIngredient2, strIngredient3, strIngredient4,strInstructions, strDrinkThumb
 
@@ -8,10 +14,24 @@ class Cocktails extends React.Component {
     super()
 
     this.state = {
-      name: 'Margarita',
-      image: 'https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg',
-      instructions: 'Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.'
+      name: '',
+      image: '',
+      instructions: ''
     }
+  }
+
+  componentDidMount () {
+    request.get(apiUrl)
+      .query({ s: cocktail })
+      .then(response => {
+        const { strDrink, strInstructions, strDrinkThumb } = response.body.drinks[0]
+        // console.log(response.body.drinks[0])
+        this.setState({
+          name: strDrink,
+          image: strDrinkThumb,
+          instructions: strInstructions
+        })
+      })
   }
 
   render () {
@@ -19,7 +39,7 @@ class Cocktails extends React.Component {
       <>
         <h1>Classic cocktails</h1>
         <div><h2>{this.state.name}</h2></div>
-        <img src={this.state.image} alt={`image of a ${this.state.name}`} />
+        <img src={this.state.image} style={imgStyle} alt={`image of a ${this.state.name}`} />
         <div>Instructions: {this.state.instructions}</div>
       </>
     )
